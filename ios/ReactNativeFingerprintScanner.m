@@ -46,14 +46,14 @@ RCT_EXPORT_METHOD(authenticate: (NSString *)reason
     NSError *error;
 
     // Toggle fallback button
-    if (fallbackEnabled) {
+    if (!fallbackEnabled) {
         context.localizedFallbackTitle = @"";
     }
 
     // Device has FingerprintScanner
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
         // Attempt Authentication
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
                 localizedReason:reason
                           reply:^(BOOL success, NSError *error)
          {
